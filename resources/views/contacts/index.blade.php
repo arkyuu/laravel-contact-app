@@ -39,7 +39,7 @@
                             <td>{{$contact->email}}</td>
                             <td>{{$contact->company->name}}</td>
                             <td>
-                                <a href=""class="btn btn-sm btn-outline-info"><i class="fa fa-eye"></i></a>
+                                <a href="{{ route('contacts.show', $contact->id) }}"class="btn btn-sm btn-outline-info"><i class="fa fa-eye"></i></a>
                                 <a href=""class="btn btn-sm btn-outline-warning"><i class="fa fa-edit"></i></a>
                                 <a href=""class="btn btn-sm btn-outline-danger"><i class="fa fa-trash"></i></a>
                             </td>
@@ -49,7 +49,7 @@
                   </tbody>
                 </table>
 
-                {{$contacts->links()}}
+                {{$contacts->appends(request()->only('company_id'))->links()}}
               </div>
             </div>
           </div>
