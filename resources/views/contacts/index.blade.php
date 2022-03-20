@@ -45,11 +45,15 @@
                             <td>{{$contact->company->name}}</td>
                             <td>
                                 <a href="{{ route('contacts.show', $contact->id) }}"class="btn btn-sm btn-outline-info"><i class="fa fa-eye"></i></a>
-                                <a href=""class="btn btn-sm btn-outline-warning"><i class="fa fa-edit"></i></a>
-                                <a href=""class="btn btn-sm btn-outline-danger"><i class="fa fa-trash"></i></a>
+                                <a href="{{ route('contacts.edit', $contact->id) }}"class="btn btn-sm btn-outline-warning"><i class="fa fa-edit"></i></a>
+                                <a href="{{ route('contacts.destroy', $contact->id) }}"class="btn-delete btn btn-sm btn-outline-danger"><i class="fa fa-trash"></i></a>
                             </td>
                             </tr>
                         @endforeach
+                        <form id="form-delete" method="POST" style="display:none">
+                            @csrf
+                            @method('DELETE')
+                        </form>
                     @endif
                   </tbody>
                 </table>
