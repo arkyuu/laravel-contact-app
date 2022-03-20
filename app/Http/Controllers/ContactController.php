@@ -15,6 +15,11 @@ class ContactController extends Controller
             if(request('company_id')){
                 $query->where('company_id', request('company_id'));
             }
+
+            if(request('search')){
+                $query->where('first_name', 'like', '%' . request('search') . '%');
+            }
+
         })->paginate(10);
 
         return view('contacts.index', compact('contacts'), compact('companies'));
@@ -69,5 +74,12 @@ class ContactController extends Controller
         $contact = Contact::findOrFail(request('id'));
         $contact->update(request()->all());
         return redirect()->route('contacts.index')->with('message', 'Contact updated successfully');
+    }
+
+    public function destroy()
+    {
+        $contact = Contact::findOrFail(request('id'));
+        $contact->delete();
+        return back()->with('message', 'Contact deleted successfully');
     }
 }

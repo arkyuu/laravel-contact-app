@@ -6,10 +6,12 @@ document.getElementById('filter_company_id').addEventListener('change', function
 document.querySelectorAll('.btn-delete').forEach(function(btn) {
     btn.addEventListener('click', function(e) {
         e.preventDefault();
-        alert('DELETE!');
-        //let url = this.getAttribute('href');
-        //let form = document.getElementById('form-delete');
-        //form.setAttribute('action', url);
-        //form.submit();
+        if (confirm("Are you sure?")) {
+            let url = this.getAttribute('href');
+            let form = document.getElementById('form-delete');
+            form.setAttribute('action', url);
+            form.submit();
+        }
+
     });
 });
