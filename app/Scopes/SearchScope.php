@@ -12,7 +12,8 @@ class SearchScope implements Scope
     public function apply(Builder $builder, Model $model)
     {
         if(request('search')){
-            foreach ($this->searchColumns as $column) {
+            $columns = property_exists($model, 'searchColumns') ? $model->searchColumns : $this->searchColumns;
+            foreach ($columns as $column) {
                 $arr = explode('.', $column);
                 if(count($arr) == 2){
                     $builder->orWhereHas($arr[0], function($query) use($arr){
