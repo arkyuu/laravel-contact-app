@@ -14,6 +14,9 @@ class SearchScope implements Scope
             $builder->where('first_name', 'like', '%' . request('search') . '%');
             $builder->orWhere('last_name', 'like', '%' . request('search') . '%');
             $builder->orWhere('email', 'like', '%' . request('search') . '%');
+            $builder->orWhereHas('company', function($query){
+                $query->where('name', 'like', '%' . request('search') . '%');
+            });
         }
     }
 }
