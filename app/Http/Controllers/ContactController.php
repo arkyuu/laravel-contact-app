@@ -10,6 +10,7 @@ class ContactController extends Controller
 {
     public function index()
     {
+        $user = auth()->user();
         $companies = Company::orderBy('name')->pluck('name', 'id')->prepend('All Companies', '');
         $contacts = Contact::lastestFirst()->paginate(10);
 
